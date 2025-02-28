@@ -1,13 +1,12 @@
 import { LanguageModelV1 } from '@ai-sdk/provider';
-import {
-  OpenAICompatibleChatLanguageModel,
-  OpenAICompatibleCompletionLanguageModel,
-} from '@ai-sdk/openai-compatible';
+
 import {
   FetchFunction,
   loadApiKey,
   withoutTrailingSlash,
 } from '@ai-sdk/provider-utils';
+import { SparkChatLanguageModel } from './spark-chat-language-model';
+import { SparkCompletionLanguageModel } from './spark-completion-language-model';
 import {
   SparkChatModelId,
   SparkChatSettings,
@@ -98,9 +97,9 @@ export function createSparkProvider(
     modelId: SparkChatModelId,
     settings: SparkChatSettings = {},
   ) => {
-    return new OpenAICompatibleChatLanguageModel(modelId, settings, {
+    return new SparkChatLanguageModel(modelId, settings, {
       ...getCommonModelConfig('chat'),
-      defaultObjectGenerationMode: 'json',
+      defaultObjectGenerationMode: 'tool',
     });
   };
 
@@ -108,7 +107,7 @@ export function createSparkProvider(
     modelId: SparkCompletionModelId,
     settings: SparkCompletionSettings = {},
   ) =>
-    new OpenAICompatibleCompletionLanguageModel(
+    new SparkCompletionLanguageModel(
       modelId,
       settings,
       getCommonModelConfig('completion'),
