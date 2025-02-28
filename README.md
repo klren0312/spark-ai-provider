@@ -21,7 +21,7 @@ import { createSparkProvider } from 'spark-ai-provider';
 ## Example
 
 ```ts
-import { createSparkProvider } from './index.mjs';
+import { createSparkProvider } from 'spark-ai-provider';
 import { generateText } from 'ai';
 const spark = createSparkProvider({
   apiKey: '',
